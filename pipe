@@ -13,7 +13,10 @@ node {
         server = Artifactory.server 'artifactory-oss-6.12.1'
 
         rtMaven = Artifactory.newMavenBuild()
-        rtMaven.tool = maven_3_6_2 // Tool name from Jenkins configuration
+        //rtMaven.tool = maven_3_6_2 // Tool name from Jenkins configuration
+        
+        def mvnHome = tool name: 'maven_3_6_2', type: 'maven'
+        
         rtMaven.deployer releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local', server: server
         rtMaven.resolver releaseRepo: 'libs-release', snapshotRepo: 'libs-snapshot', server: server
         rtMaven.deployer.deployArtifacts = false // Disable artifacts deployment during Maven run
